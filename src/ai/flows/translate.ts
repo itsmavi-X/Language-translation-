@@ -12,9 +12,6 @@ export const translateFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async ({ text, sourceLang, targetLang }) => {
-    const model = 'googleai/gemini-2.5-flash';
-    const llm = ai.getModel(model);
-
     const languageMap: Record<string, string> = {
       en: 'English',
       es: 'Spanish',
@@ -35,7 +32,7 @@ export const translateFlow = ai.defineFlow(
 
     const prompt = `Translate the following text from ${sourceLanguage} to ${targetLanguage}. Do not add any extra commentary or analysis, just the translated text.\n\nText: "${text}"`;
 
-    const { text: translatedText } = await llm.generate({
+    const { text: translatedText } = await ai.generate({
       prompt,
     });
     
